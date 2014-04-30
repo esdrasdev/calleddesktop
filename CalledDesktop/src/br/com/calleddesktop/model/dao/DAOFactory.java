@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import org.hibernate.Session;
 
 /**
- * Classe responsável por
+ * Classe responsável por criar as instancias das classes DAO's.
  *
  * @author Esdras França - <esdrasdev@gmail.com>
  * @since 30/04/2014 17:09:47
@@ -25,8 +25,8 @@ public class DAOFactory {
 
         try {
             Class classe = Class.forName(classeDAO.getName());
-            Constructor c = classe.getConstructor(Session.class, Class.class);
-            Object obj = c.newInstance(HibernateUtil.getSessionFactory().getCurrentSession(), classeDAO);
+            Constructor cons = classe.getConstructor(Session.class, Class.class);
+            Object obj = cons.newInstance(HibernateUtil.getSessionFactory().getCurrentSession(), classeDAO);
             dao = (BaseDAOImplementation) obj;
 
         } catch (InstantiationException ex) {
