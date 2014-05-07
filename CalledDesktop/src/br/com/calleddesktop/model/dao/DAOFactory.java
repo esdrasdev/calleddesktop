@@ -24,8 +24,7 @@ public class DAOFactory {
         BaseDAOImplementation dao = null;
 
         try {
-            Class classe = Class.forName(classeDAO.getName());
-            Constructor cons = classe.getConstructor(Session.class, Class.class);
+            Constructor cons = classeDAO.getConstructor(Session.class, Class.class);
             Object obj = cons.newInstance(HibernateUtil.getSessionFactory().getCurrentSession(), classeDAO);
             dao = (BaseDAOImplementation) obj;
 
@@ -40,8 +39,6 @@ public class DAOFactory {
         } catch (NoSuchMethodException ex) {
             Logger.getLogger(DAOFactory.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SecurityException ex) {
-            Logger.getLogger(DAOFactory.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
             Logger.getLogger(DAOFactory.class.getName()).log(Level.SEVERE, null, ex);
         } 
 
